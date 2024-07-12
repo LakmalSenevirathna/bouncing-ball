@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Bouncing Ball</title>
+</head>
+<body>
+    <div class="container">
+        <div class="ball__container">
+            <div id="ball"></div>
+        </div>
+        <div class="btn__count__container">
+            <div class="btn__box">
+                <div class="btn" onclick="moveBall()" role="button">
+                    Start
+                </div>
+                <div class="count__box">
+                    <div class="count" >Bounces<input id="count" type="text"></div>
+                </div>
+                <div class="btn" onclick="stopBall()" role="button">
+                    Stop
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+
+var intervalId;
+
+function moveBall(){
+    var count=0;
+    var topValue = 0;
+	var leftValue = 0;
+
+    var topUpdate = 1;
+	var leftUpdate = 1;
+
+        intervalId = setInterval(() => {
+        topValue=topValue+topUpdate;
+		leftValue+=leftUpdate;
+
+        document.getElementById("ball").style.top=topValue+"px";
+		document.getElementById("ball").style.left=leftValue+"px";
+        document.getElementById("count").value=count;
+
+            if(topValue>380){
+                topUpdate=-1;
+                document.getElementById("ball").style.backgroundColor="yellow";
+                count=count+1;
+            }
+            if(leftValue>580){
+                leftUpdate=-1;
+                document.getElementById("ball").style.backgroundColor="blue";
+            }
+            if(topValue<0){
+                topUpdate=1;
+                document.getElementById("ball").style.backgroundColor="green";
+            }
+            if(leftValue<0){
+                leftUpdate=1;
+                document.getElementById("ball").style.backgroundColor="red";
+            }
+
+    },10); // Ball move every 10 miliseconds
+    
+}
+
+
+function stopBall() {
+    clearInterval(intervalId);
+}
+
+</script>
+</html>
